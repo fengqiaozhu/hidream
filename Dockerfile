@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.1.0-runtime-ubuntu22.04
+FROM nvidia/cuda:12.1.0-devel-ubuntu22.04
 
 # 设置环境变量避免交互式提示
 ENV DEBIAN_FRONTEND=noninteractive
@@ -8,8 +8,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.10 \
     python3-pip \
     python3.10-venv \
+    python3.10-dev \
     git \
     curl \
+    build-essential \
     && rm -rf /var/lib/apt/lists/* \
     && ln -s /usr/bin/python3.10 /usr/bin/python
 
@@ -41,7 +43,7 @@ RUN pip install --no-cache-dir torch torchvision torchaudio  && \
     supervisor==4.2.5 \
     huggingface-hub>=0.20.3 \
     tqdm>=4.66.1 && \
-    pip install flash-attn==2.6.3 --no-build-isolation
+    TORCH_CUDA_ARCH_LIST="7.5;8.0;8.6" pip install flash-attn==2.6.3 --no-build-isolation
 
 # 配置 supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
