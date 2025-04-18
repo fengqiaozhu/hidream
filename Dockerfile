@@ -28,7 +28,7 @@ COPY scripts/ /app/scripts/
 RUN mkdir -p /models
 
 # 安装 Python 依赖
-RUN pip install --no-cache-dir torch torchvision torchaudio --index-url https://mirrors.aliyun.com/pytorch-wheels/cu124 && \
+RUN pip install --no-cache-dir torch==2.2.1+cu121 torchvision==0.17.1+cu121 torchaudio==2.2.1 --index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
     pip install --no-cache-dir \
     diffusers==0.30.3 \
     transformers==4.44.2 \
