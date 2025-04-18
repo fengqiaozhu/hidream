@@ -10,4 +10,6 @@ gradio==4.44.0
 requests==2.32.3
 pillow==10.4.0
 flash-attn==2.6.3
-supervisor==4.2.5 
+supervisor==4.2.5
+huggingface-hub>=0.20.3
+tqdm>=4.66.1 

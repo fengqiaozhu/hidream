@@ -16,8 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 
 # 复制应用文件
-COPY app.py web.py /app/
-COPY scripts/start.sh /app/
+COPY app.py web.py requirements.txt /app/
+COPY scripts/ /app/scripts/
 
 # 创建模型目录
 RUN mkdir -p /models
@@ -33,14 +33,19 @@ RUN pip install --no-cache-dir torch torchvision torchaudio --index-url https://
     gradio==4.44.0 \
     requests==2.32.3 \
     pillow==10.4.0 \
-    supervisor==4.2.5 && \
+    supervisor==4.2.5 \
+    huggingface-hub>=0.20.3 \
+    tqdm>=4.66.1 && \
     pip install flash-attn==2.6.3 --no-build-isolation
 
 # 配置 supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# 设置执行权限
+RUN chmod +x /app/scripts/start.sh
+
 # 暴露端口
 EXPOSE 8000 7860
 
 # 设置启动命令
-CMD ["/usr/local/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/app/scripts/start.sh"]
