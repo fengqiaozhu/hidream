@@ -13,6 +13,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && ln -s /usr/bin/python3.10 /usr/bin/python
 
+# 配置pip使用国内源
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
+    && pip config set global.trusted-host pypi.tuna.tsinghua.edu.cn
+
 # 设置工作目录
 WORKDIR /app
 
@@ -24,7 +28,7 @@ COPY scripts/ /app/scripts/
 RUN mkdir -p /models
 
 # 安装 Python 依赖
-RUN pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124 && \
+RUN pip install --no-cache-dir torch torchvision torchaudio --index-url https://mirrors.aliyun.com/pytorch-wheels/cu124 && \
     pip install --no-cache-dir \
     diffusers==0.30.3 \
     transformers==4.44.2 \
