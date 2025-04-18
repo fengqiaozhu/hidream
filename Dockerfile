@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.4.0-runtime-ubuntu22.04
+FROM nvidia/cuda:12.1.0-runtime-ubuntu22.04
 
 # 设置环境变量避免交互式提示
 ENV DEBIAN_FRONTEND=noninteractive
@@ -27,8 +27,8 @@ COPY scripts/ /app/scripts/
 # 创建模型目录
 RUN mkdir -p /models
 
-# 安装 Python 依赖
-RUN pip install --no-cache-dir torch==2.2.1+cu121 torchvision==0.17.1+cu121 torchaudio==2.2.1 --index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
+# 安装 PyTorch（使用官方源）和其他依赖（使用清华源）
+RUN pip install --no-cache-dir torch torchvision torchaudio  && \
     pip install --no-cache-dir \
     diffusers==0.30.3 \
     transformers==4.44.2 \
