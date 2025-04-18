@@ -23,7 +23,7 @@
 
 1. 克隆仓库：
 ```bash
-git clone https://github.com/yourusername/hidream.git
+git clone https://github.com/fengqiaozhu/hidream.git
 cd hidream
 ```
 

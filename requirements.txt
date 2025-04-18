@@ -1,0 +1,13 @@
+torch
+torchvision
+torchaudio
+diffusers==0.30.3
+transformers==4.44.2
+accelerate==0.33.0
+fastapi==0.115.0
+uvicorn==0.30.6
+gradio==4.44.0
+requests==2.32.3
+pillow==10.4.0
+flash-attn==2.6.3
+supervisor==4.2.5 
