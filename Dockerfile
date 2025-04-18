@@ -5,12 +5,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # 安装系统依赖
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3.12 \
+    python3.10 \
     python3-pip \
+    python3.10-venv \
     git \
     curl \
     && rm -rf /var/lib/apt/lists/* \
-    && ln -s /usr/bin/python3.12 /usr/bin/python
+    && ln -s /usr/bin/python3.10 /usr/bin/python
 
 # 设置工作目录
 WORKDIR /app
